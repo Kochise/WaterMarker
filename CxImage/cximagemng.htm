@@ -1,0 +1,105 @@
+<!--#include virtual="header.shtml" -->
+<!--#include virtual="/global/getCss.inc" -->
+
+<CENTER><H3><FONT COLOR="#AOAO99">
+[CxImageMNG - A class to read MNG, JNG and PNG images]
+</FONT></H3></CENTER><HR>
+<!-- Author and contact details -->
+This article was contributed by <A HREF="mailto:[ing.davide.pizzolato@libero.it]">Davide 
+Pizzolato</A>. 
+<!-- For which environment is this code specific??? -->
+<p><img src="cximagemng.gif" width="322" height="231"></p>
+<p><u>Environment:</u> VC6
+<h3>Introduction</h3>
+<p><code>CxImageMNG</code> is the module of <code><a href="http://www.aoi.it/code.htm">CxImage</a></code> 
+  used to play MNG animations. It uses the CxImage members, but to play the animation 
+  are necessary additional variables and functions. I decided to keep separated 
+  the MNG stuff from the &quot;static&quot; formats, to limit the growth of the 
+  base class due to the new features. 
+<p>As with the other modules, CxImageMNG is mainly an interface for the LibMNG 
+  functions, it takes care of the I/O operations and of the specific requirements 
+  of the library. CxImageMNG can read also PNG and JNG images.
+<p>This class requires some extra libraries to work: <b>LibMNG</b>, you can find 
+  <a href="http://www.libpng.org">here</a> the latest version; <b>JPEG and ZLIB 
+  libraries</b>, used by LibMNG to endode/decode files. All these libraries are 
+  included in the source code.
+<h3>Structures &amp; callbacks</h3>
+<p>&quot;Libmng makes extensive use of callback functions. This is meant to keep 
+  the library as platform-independant and flexible as possible.&quot;, in CxImageMNG 
+  these are declared as:</p>
+<pre>mng_setcb_errorproc    (mng_handle, mymngerror);
+mng_setcb_openstream   (mng_handle, mymngopenstream);
+mng_setcb_closestream  (mng_handle, mymngclosestream);
+mng_setcb_readdata     (mng_handle, mymngreadstream);
+mng_setcb_processheader(mng_handle, mymngprocessheader);
+mng_setcb_getcanvasline(mng_handle, mymnggetcanvasline);
+mng_setcb_refresh      (mng_handle, mymngrefresh);
+mng_setcb_gettickcount (mng_handle, mymnggetticks);
+mng_setcb_settimer     (mng_handle, mymngsettimer);
+mng_setcb_refresh      (mng_handle, mymngrefresh);</pre>
+Some of these are empty (<code>mymngopenstream</code>), or obvious (<code>mymngreadstream</code>), 
+the most useful for the final applications are <code>mymngprocessheader</code>, 
+where we get the first informations about the image, and <code>mymngsettimer</code>, 
+where get the essential value for the timer. 
+<p>Another important parameter is <code>pUserdata</code>, where the application 
+  can store its parameters, in CxImageMNG this is a pointer to the <code>mnginfo</code> 
+  variable.</p>
+<pre>typedef struct
+  {
+  FILE *file;        // file handle
+  BYTE *image;       // image pixels
+  HANDLE thread;     // timer
+  mng_uint32 delay;  // timer duration
+  mng_uint32 width;  // image attributes
+  mng_uint32 height;
+  mng_uint32 effwdt;
+  mng_int16 bpp;
+  mng_bool animation; // true if it's an animation
+  mng_bool animation_enabled; // enable the timer
+  float speed;       // speed factor
+  } mngstuff;</pre>
+<p>In the callbacks, these informations are available at all times through the 
+  <code>mng_get_userdata</code> function. </p>
+<h3>How to play animations</h3>
+<p>First we must load the file:</p>
+<pre>image = new CxImageMNG();
+image-&gt;ReadFile(filename);</pre>
+<p>then, if it's an animation, we must create a thread to play it:</p>
+<pre>if (image->mnginfo.animation) {
+	image->mnginfo.animation_enabled=1;
+	DWORD dwID;
+	image->mnginfo.thread = CreateThread(NULL,0,RunMNGThread,this,0,&dwID);
+}</pre>
+<p>In the end we must handle the execution of the thread :</p>
+<pre>unsigned long _stdcall RunMNGThread(void *lpParam){
+	Sleep((DWORD)(image->mnginfo.delay / image->mnginfo.speed));
+	while (image->mnginfo.animation_enabled && image->Resume()){
+		SendMessage(hWnd, WM_USER_NEWFRAME,0,0);
+		Sleep((DWORD)(image->mnginfo.delay / image->mnginfo.speed));
+	}
+	image->mnginfo.thread=0;
+	return 0;
+}</pre>
+<p>The <code>WM_USER_NEWFRAME</code> message tells to the main application that 
+  a new frame is ready to be shown. The <code>Resume()</code> function is used 
+  to obtain the next frame.<br>
+  To stop the animation simply set <code>image-&gt;mnginfo.animation_enabled = 
+  0.<br>
+  </code>The thread is automatically closed in the CxImageMNG destructor.</p>
+<p>Finally you can display the image: <code>image-&gt;Draw(pDC-&gt;GetSafeHdc());</code></p>
+<h3>Credits.</h3>
+<ul>
+  <li>LIBMNG Copyright (c) 2000,2001 Gerard Juyn (gerard@libmng.com).<br>
+  <li>Original mng.cpp code created by Nikolaus Brennig, November 14th, 2000. 
+    (virtualnik@nol.at).<br>
+  <li>Special thanks to Frank Haug (f.haug@jdm.de) for suggestions and code.</li>
+</ul>
+<p>More specific credits and disclaimers are in every header file of each library.<br>
+</p>
+<h3>Downloads</h3>
+<!-- demo and source files -->
+<A HREF="cximagemng_demo.zip"> Download demo - 165 Kb</A><BR>
+<A HREF="cximagemng_src.zip"> Download full source code - 752 Kb</A> 
+<h3>History</h3>
+Date Posted: 11/18/2001<BR>
+<!--#include virtual="footer.shtml" -->

@@ -1,0 +1,608 @@
+<!-- Article Starts --><!-- Download Links --> 
+<UL class=download>
+  <LI 
+class=download><A 
+href="http://www.codeproject.com/bitmap/CXImage/CXImage_src.zip">Download source 
+    files - 986 Kb</A> </LI>
+  <LI><a href="http://www.codeproject.com/bitmap/CXImage/CXImage_demo.zip">Download 
+    demo 270 Kb</a></LI>
+</UL>
+<!-- Article image --> <P><IMG height=260 
+alt="Sample Image - sample.gif" src="The Code Project - CXImage - Bitmaps &amp; 
+Palettes_file/sample.gif" width=365></P> <H2>Introduction</H2> 
+<P><CODE>CxImage</CODE> is a C++ class to manage virtually any kind of images. 
+It can load, save, display, transform images in a very simple and fast way. 
+<H2>Why another image library?</H2> <P>Around there are many good libraries 
+(OpenIL, FreeImage, PaintLib ...), these are powerful, complete, and constantly 
+updated. However if you ever try to use them, you may find some difficulties; 
+because these libraries are mainly platform independent, written in C, sometimes 
+with a basic C++ wrapper and with tons of compiler switch declarations.</P> 
+<H2>Is it a MFC library?</H2> <P>No. Altogether it's a windows library, because 
+of some particular constructors and the painting functions, but the backbone is 
+platform independent.</P> 
+<H2>What's new in version 1.25</H2>
+<ul>
+  <li>On the fly transparency for indexed images (1, 4 &amp; 8 bpp) and RGB images 
+    (24 bpp, works properly only with 24 and 32 bit display modes).</li>
+  <li>Fixed PNG reading interlaced and gray scale images, and saving 1 &amp; 4 
+    bpp images.</li>
+  <li>Added support for 32 bit PNGs and 16 bit TIFs </li>
+  <li>Fixed GIF saving and reading 1 &amp; 4 bpp images.</li>
+  <li>PNG and GIF encoders save transparency information .</li>
+  <li>Basic MNG encoder/decoder.</li>
+  <li>Resample() / DecreaseBpp() / IncreaseBpp () / SetStdPalette() functions.</li>
+</ul>
+<H2>To GIF or not to GIF?</H2> <P>Easy: 
+PNG and MNG! The library contains LZW encoders/decoders. Due to Unisys patent 
+enforcement, you should be aware of the limitations. The TIFF library is also 
+affected by this. With <code>CxImage</code> it's a simple operation to remove a 
+specific format, you are free to make your choice.</P> <H2>Hey, this library is 
+huge!</H2> <P>I'm sorry, but each JPG, PNG and TIFF library adds about 100KB to 
+the final application. <code>CxImage</code> impact is less than 50KB. So you 
+should support and link only the formats that your application really needs.</P> 
+<H2>Will CxImage support more formats?</H2> <P>Maybe. <code>CxImage</code> has 
+been designed to be easily extended, but <code>CxImage</code> first should be 
+stable enough to guarantee a good base class for the other formats. In any case, 
+the actual 7 formats cover the 99% of the normal demand.</P> <H2>History and 
+credits.</H2> <P>Starting form my <CODE>CxDib</CODE> class, that implements 
+memory DIBs only, I tried to add some members to read images from files. Looking 
+for a solution, I found a nice MFC class named <CODE>CImage</CODE> on the net, 
+release 1.4 (1998). <CODE>CImage</CODE> supports BMP, GIF, PNG and JPG, but 
+suffers many little bugs and uses a complex class structure, so I decided to 
+strip it to the base and merge <CODE>CxDib</CODE> with the <CODE>CImage</CODE> 
+philosophy, to obtain the new <CODE>CxImage</CODE> class. Also I updated the 
+libraries for JPG, PNG and ZLIB.<br> With <CODE>CxImage</CODE> is very easy to 
+add new image types, so I added the TIFF library (rev. 6) and a minimal support 
+for <CODE>ICON</CODE>s and MNGs. Finally I added some specific constructors to 
+obtain an image from global <CODE>HANDLE</CODE>s (windows clipboard) and objects 
+(windows resources).</P> <P>Special thanks to <a 
+href="mailto:TRK@lyngsoe.com">Troels Knakkergaard</a> for his precious work, 
+since release 1.00 he has worked on a parallel version of CxImage adding new 
+features, enhancements and bugfixes. His release offers support for 
+serialization, unicode, a different approach with file handling and other nice 
+features, you can find it <a 
+href="http://www.codeproject.com/bitmap/trans_cimage.asp">here</a>. <UL> 
+<LI>CImage is: (c)1995-1998, <a href="mailto:asierra@servidor.unam.mx">Alejandro 
+Aguilar Sierra</a>.<BR> <LI>IJG JPEG library is: (c)1994-1998, Thomas G. 
+Lane.<BR> <LI>LibPNG version 1.0.12 is: (c)1998-2001 Glenn Randers-Pehrson<BR> 
+<LI>LibTIFF is: (c)1988-1997 Sam Leffler, (c)1991-1997 Silicon Graphics, Inc. 
+<LI> LIBMNG version 1.0.2 is: (c) 2000,2001 <a 
+href="mailto:gerard@libmng.com">Gerard Juyn</a>.<BR>
+
+  <LI>FreeImage 2.4.0 : Design and implementation by <a href="mailto:flvdberg@wxs.nl">Floris
+    van den Berg</a>.</LI>
+  <LI>Thanks to <a href="mailto:rrajivram@hotmail.com">Rajiv Ramachandran</a>
+    for <code>CTwain</code> code.</LI>
+</UL>
+<P>More specific credits and disclaimers are in every header file of each
+library.</P>
+<H2>How to ...</H2>
+<H2>... compile the library</H2>
+<P>You must compile all the libraries before you can link the demo application.
+  The whole operation is quite simple: open the <B>CxImgLib.dsw</B> workspace,
+  select the menu "Build/Batch Build..." and click the "Build" button.<BR>
+</P>
+<TABLE width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><IMG height=128
+      src="The Code Project - CXImage - Bitmaps &amp; Palettes_file/sample1.gif"
+      width=203></TD>
+    <TD><IMG height=228
+      src="The Code Project - CXImage - Bitmaps &amp; Palettes_file/sample2.gif"
+      width=372></TD></TR></TBODY></TABLE>
+<P>This will need some minutes to complete (the intermediate files occupy
+60MB!). When everything is done, select the demo project and launch the
+application.<BR>The demo application shows how to:
+<UL>
+  <LI>Open, save, display and print images.
+  <LI>Display Bitmap, JPEG, PNG, TIFF or GIF resources.
+  <LI>Exchange images with the clipboard.
+  <LI>Capture windows screenshots or acquire image from TWAIN compatible devices.
+  <LI>Get pixels information and transform the images.
+</UL>
+<H2>... load an image resource</H2>
+<pre><code>	//Load the resource IDR_PNG1 from the PNG resource type
+	CxImage* newImage = new CxImage();
+	newImage->LoadResource(FindResource(NULL,MAKEINTRESOURCE(IDR_PNG1),"PNG"),CXIMAGE_FORMAT_PNG);</code></pre>
+	or
+<pre><code>	//Load the resource IDR_JPG1 from the JPG resource type
+ 	CxImage* newImage = new CxImage();
+	newImage->LoadResource(FindResource(NULL,"IDR_JPG1","JPG"),CXIMAGE_FORMAT_JPG);</code></pre>
+	or
+<pre><code>	//Load a bitmap resource;
+	HBITMAP bitmap = ::LoadBitmap(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDB_BITMAP1)));
+	CxImage *newImage = new CxImage((HBITMAP)bitmap);</code></pre>
+<H2>... copy/paste an image</H2>
+<pre><code>	//copy
+	HANDLE hDIB = image->CopyToHandle();
+	if (::OpenClipboard(AfxGetApp()->m_pMainWnd->GetSafeHwnd())) {
+		if(::EmptyClipboard()) {
+			if (::SetClipboardData(CF_DIB,hDIB) == NULL ) {
+				AfxMessageBox( "Unable to set Clipboard data" );
+	}	}	}
+	CloseClipboard();
+
+	//paste
+	HANDLE hBitmap=NULL;
+	if (OpenClipboard()) hBitmap=GetClipboardData(CF_DIB);
+	if (hBitmap) CxImage *image = new CxImage(hBitmap);
+	CloseClipboard();</code></pre>
+<H2>CxImage Class Members &amp; Operations</H2>
+<H3><B>Supported file formats</B></H3>
+<P>At the begining of the main header file <CODE>ximage.h</CODE> you'll find the
+definitions to enable or disable a specific format:<BR><CODE>// CxImage supported formats<BR>#define CXIMAGE_SUPPORT_BMP 1<BR>#define CXIMAGE_SUPPORT_GIF 0<BR>#define CXIMAGE_SUPPORT_JPG 1<BR>#define CXIMAGE_SUPPORT_PNG 1<BR>#define CXIMAGE_SUPPORT_MNG 0<BR>#define CXIMAGE_SUPPORT_ICO 1<BR>#define CXIMAGE_SUPPORT_TIF 1<BR></CODE>Remember
+to rebuild the library if you change these statements.</P>
+<H3><B>Construction</B></H3>
+<TABLE width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>CxImage(DWORD imagetype=0)</CODE></TD>
+    <TD width="50%">- Creates an empty image. <code>imagetype</code> (optional)
+      sets the image format (for future use).</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>CxImage(DWORD dwWidth, DWORD dwHeight, WORD wBpp, DWORD
+      imagetype=0)</CODE></TD>
+    <TD width="50%">- Creates an image with the specified width, height, bit per
+      pixel and (optional) image type arguments.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>CxImage(const CxImage
+      *isrc)</CODE></TD>
+    <TD width="50%">- Creates an image with the same characteristics of the source
+      image. The source image pixels are not copied in the new image.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>CxImage(HBITMAP hbmp)</CODE></TD>
+    <TD width="50%">- Creates an image from a bitmap object. (resource)</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>CxImage(HANDLE hMem)</CODE></TD>
+    <TD width="50%">- Creates an image from a global bitmap handle. (clipboard
+      operations)</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%">
+      <p><CODE>CxImage(const char * filename, DWORD imagetype=0)<br>
+        CxImage(FILE * stream, DWORD imagetype = 0)</CODE></p>
+    </TD>
+    <TD width="50%">- Creates an image from file.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<H3><B>Initialization</B> </H3>
+<TABLE width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%"><code>void* Create(DWORD dwWidth, DWORD dwHeight, WORD wBpp, 
+      DWORD imagetype=0)</code></TD>
+    <TD width="50%">- Initializes or rebuilds the image. Returns the pointer to
+      the internal hDib object.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void Clear(BYTE bval=0)</code></TD>
+    <TD width="50%">- Sets the image bits to the specified value.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void Copy(CxImage *src)</code></TD>
+    <TD width="50%">- Copies the image from an exsisting one.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <tr valign=top>
+    <td width="47%"><code>HANDLE CopyToHandle()</code></td>
+    <td width="50%">- Copies the image to a global memory handle (clipboard operations)</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <TR vAlign=top>
+    <td width="47%"><code>void Transfer(CxImage *from)</code></td>
+    <td width="50%">- Transfers the image from an existing source image. The source
+      become empty.</td>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%" height="96"><code>bool LoadResource(HRSRC hRes, DWORD imagetype)</code></TD>
+    <TD width="50%" height="96">- Loads an image from the application resources.<br>
+      <code>hRes</code> is the resource handle returned by <code>FindResource()</code>.<br>
+      <code>imagetype</code> can be one of these formats:<br>
+      <code>CXIMAGE_FORMAT_JPG, CXIMAGE_FORMAT_TIF, CXIMAGE_FORMAT_ICO,CXIMAGE_FORMAT_GIF, 
+      CXIMAGE_FORMAT_PNG</code>.</TD>
+    <TD width="3%" height="96">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>bool SaveFile(const char * filename,DWORD imagetype=0)</code><br>
+      <code>bool SaveFile(LPCWSTR filename, DWORD imagetype=0)</code><br>
+      <code>bool Encode(FILE * hFile, DWORD imagetype)</code><br>
+      </TD>
+    <TD width="50%">- Saves to disk the image in a specific format.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%" height="52"><code>bool ReadFile(const char * filename,DWORD imagetype=0)</code><br>
+      <code>bool ReadFile(LPCWSTR filename, DWORD imagetype=0)</code><br>
+      <code>bool Decode(FILE * hFile, DWORD imagetype)</code><br>
+      </TD>
+    <TD width="50%" height="52">- Reads from disk the image in a specific format.</TD>
+    <TD width="3%" height="52">&nbsp;</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<H3>Image operations</H3>
+<table width="100%" border=1>
+  <tr valign=top>
+    <td width="47%"><code>bool IsValid()</code></td>
+    <td width="50%">- Checks if the image is correctly initializated.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tbody>
+  <tr valign=top>
+    <td width="47%"><code>bool Flip()</code></td>
+    <td width="50%">- Flips upside down the image.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>bool Mirror()</code></td>
+    <td width="50%">- Mirrors the image.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>bool Rotate(float angle)</code></td>
+    <td width="50%">- Rotates the image.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>bool Negative()</code></td>
+    <td width="50%">- Inverts the image colors.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>bool GrayScale()</code></td>
+    <td width="50%">- Convert the image colors to 8 bit gray scale.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>bool Resample(long newx, long newy, int fast = 1)</code><br>
+    </td>
+    <td width="50%">- Resizes the image. <code>fast</code> can be 0 for slow (accurate)
+      method or 1 for fast (nearest pixel) method. The function is faster with
+      24 and 1 bpp images, slow for 4 bpp images and slowest for 8 bpp images.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>bool DecreaseBpp(DWORD nbit, RGBQUAD* ppal = 0)</code></td>
+    <td width="50%">- Reduces the number of bits per pixel to <code>nbit</code> (1, 4 or 8).<br>
+      <code>ppal</code> points to a valid palette for the final image; if not
+      supplied the function will use a standard palette. <code>ppal</code> is
+      not necessary for reduction to 1 bpp.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>bool IncreaseBpp(DWORD nbit)</code></td>
+    <td width="50%">- Increases the number of bits per pixel of the image.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  </tbody>
+</table>
+<H3><B>Painting operations</B></H3>
+<TABLE width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%"><code>long Draw(HDC pDC, long
+      xoffset, long yoffset, long
+      xsize = -1, long size = -1)</code><br>
+      <code>long Draw(HDC hdc, const RECT&amp; rect)</code>
+      </TD>
+    <TD width="50%">- Draws the image in the specified device context.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>long Stretch(HDC pDC,long
+      xoffset,long yoffset,long
+      xsize,long ysize)</code><br>
+      <code>long Stretch(HDC hdc, const RECT&amp; rect)</code>
+      </TD>
+    <TD width="50%">- Stretch the image. <i>(obsolete, use Draw)</i></TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>long Tile(HDC pDC, RECT *rc)</code></TD>
+    <TD width="50%">- Tiles the image to fill the specified rectangle.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<H3><B>Multiple Images operations</B></H3>
+<P>These are specific function to load multiple TIFF and ICON images.</P>
+<table width="100%" border=1>
+  <tbody>
+  <tr valign=top>
+    <td width="47%"><code>long GetNumFrames()</code></td>
+    <td width="50%">- Returns the number of images in the file. This function
+      must be used after a <code>ReadFile()</code> call.<br>
+      Use the sequence <code>SetFrame(-1); ReadFile(...); GetNumFrames(); </code>
+      to get the number of images without loading the first image.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>long GetFrame()</code></td>
+    <td width="50%">- Returns the current selected image (zero-based index).</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>long SetFrame()</code></td>
+    <td width="50%">- Set the image number that the next <code>ReadFile()</code>
+      call will load.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  </tbody>
+</table>
+<H3><B>Transparency</B></H3>
+<TABLE width="100%" border=1 dwcopytype="CopyTableRow">
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%"><code>long GetTransIndex()</code></TD>
+    <TD width="50%">- Gets the index used for transparency. Returns -1 for no
+      transparancy.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <td width="47%"><code>RGBQUAD GetTransColor()</code></td>
+    <td width="50%">- Gets the color used for transparency.</td>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <tr valign=top>
+    <td width="47%"><code>void SetTransIndex(long idx)</code></td>
+    <td width="50%">- Sets the index used for transparency with 1, 4 and 8 bpp
+      images. Set to -1 to remove the effect.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SetTransColor(RGBQUAD rgb)</code></TD>
+    <TD width="50%">- Sets the color used for transparency with 24 bpp images.
+      You must call <code>SetTransIndex(0)</code> to enable the effect, <code>SetTransIndex(-1)</code>
+      to disable it.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<H3><B>Palette operations</B></H3>
+<P>These functions have no effects on RGB images and in this case the returned
+value is always 0.</P>
+<TABLE width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>DWORD GetPaletteSize()</CODE></TD>
+    <TD width="50%">- Returns the palette dimension in bytes.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>RGBQUAD* GetPalette()</CODE></TD>
+    <TD width="50%">- Returns the pointer to the first palette index.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>RGBQUAD GetPaletteColor(BYTE idx)<BR>
+      bool GetRGB(int
+      i, BYTE* r, BYTE* g, BYTE* b) </CODE></TD>
+    <TD width="50%">- Returns the color of the specified index.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>BYTE GetNearestIndex(RGBQUAD c)</CODE></TD>
+    <TD width="50%">- Returns the best palette index that matches a specified
+      color .</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SetPalette(DWORD n, BYTE *r, BYTE *g, BYTE *b)</code><BR>
+      <CODE>void SetPalette(RGBQUAD* pPal,DWORD nColors=256)</CODE><BR>
+      <CODE>void SetPalette(rgb_color_struct *rgb,DWORD nColors=256)</CODE></TD>
+    <TD width="50%">- Set the palette entries.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SetPaletteIndex(BYTE
+      idx, BYTE r, BYTE g, BYTE b)</code><BR>
+      <CODE>void SetPaletteIndex(BYTE idx, RGBQUAD c)</CODE><BR>
+      <code>void SetPaletteIndex(BYTE idx, COLORREF cr)</code></TD>
+    <TD width="50%">- Set the color of the specified palette index.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SetGrayPalette()</code></TD>
+    <TD width="50%">- Turns to gray scale palette.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void BlendPalette(COLORREF cr,long perc)</code></TD>
+    <TD width="50%">- Colorize the palette.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>bool IsGrayScale()</code></TD>
+    <TD width="50%">- Returns true if the image has 256 colors and a linear grey
+      scale palette.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SwapIndex(BYTE idx1, BYTE idx2)</code></TD>
+    <TD width="50%">- Swaps two indexes in the image and their colors in the palette.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SetStdPalette()</code></TD>
+    <TD width="50%">- Sets a palette with standard colors for 4 and 8 bpp images.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>RGBQUAD HSLtoRGB(COLORREF cHSLColor)</CODE><BR>
+      <CODE>RGBQUAD RGB2RGBQUAD(COLORREF cr)</CODE><BR>
+      <CODE>COLORREF RGBQUAD2RGB (RGBQUAD c)</CODE><BR>
+      <CODE>RGBQUAD RGBtoHSL(RGBQUAD lRGBColor)</CODE><BR>
+      <CODE>RGBQUAD HSLtoRGB(RGBQUAD lHSLColor)</CODE></TD>
+    <TD width="50%">- Color transformation utilities.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<H3><B>Pixels operations</B></H3>
+<TABLE width="100%" border=1>
+  <tr valign=top>
+    <td width="47%"><code>bool IsInside(long x, long y)</code></td>
+    <td width="50%">- Checks if the coordinates are inside the image.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>BYTE GetPixelIndex(long x,long y)</CODE></TD>
+    <TD width="50%">- Returns the pixel index (0 for RGB images).</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>RGBQUAD GetPixelColor(long x,long y)</CODE></TD>
+    <TD width="50%">- Returns the pixel color.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SetPixelIndex(long x,long y,BYTE i)</code></TD>
+    <TD width="50%">- Sets the pixel index, only for indexed images.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>void SetPixelColor(long
+      x,long y,RGBQUAD c)</code><BR>
+      <CODE>void SetPixelColor(long x,long y,COLORREF
+      cr)</CODE></TD>
+    <TD width="50%">- Sets the pixel color.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<H3><B>Attributes</B></H3>
+<TABLE width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="47%"><code>long GetSize()</code></TD>
+    <TD width="50%">- Returns the size in byte of the internal hDib object.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>BYTE* GetBits()</CODE></TD>
+    <TD width="50%">- Returns the pointer to the image pixels (USE CAREFULLY).</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>DWORD GetHeight()</CODE></TD>
+    <TD width="50%">&nbsp;</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>DWORD GetWidth()</CODE></TD>
+    <TD width="50%">&nbsp;</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>DWORD GetEffWidth()</CODE></TD>
+    <TD width="50%">- Returns the DWORD aligned width of the image.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>DWORD GetNumColors()</CODE></TD>
+    <TD width="50%">- Returns 2, 16, 256; 0 for RGB images.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>BYTE GetColorType()</CODE></TD>
+    <TD width="50%">- Returns: 1=Palette, 2=RGB, 4=Alpha.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>WORD GetBpp()</CODE></TD>
+    <TD width="50%">- Returns: 1, 4, 8, 24.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>DWORD GetType()</CODE></TD>
+    <TD width="50%">- Returns the file extension associated with the image.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><CODE>LPSTR GetLastError()</CODE></TD>
+    <TD width="50%">- Returns the last reported error.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  <TR vAlign=top>
+    <TD width="47%"><code>HANDLE GetDIB()</code></TD>
+    <TD width="50%">- Returns the internal hDib object.</TD>
+    <TD width="3%">&nbsp;</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<p>
+  <h2>Miscellaneous</h2>
+<p></p>
+<table width="100%" border=1>
+  <tbody>
+  <tr valign=top>
+    <td width="47%"><code>HBITMAP MakeBitmap(HDC hdc)</code><br>
+    </td>
+    <td width="50%">- Creates a device-dependent bitmap (DDB) from the image (DIB)</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>long GetProgress()</code></td>
+    <td width="50%">- Used to monitor the slow loops. The returned value is from
+      0 to 100.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>long GetEscape()</code></td>
+    <td width="50%">- Returns the escape code.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>void SetProgress(long p)</code></td>
+    <td width="50%">- Forces the value of the internal progress variable.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr valign=top>
+    <td width="47%"><code>void SetEscape(long i)</code></td>
+    <td width="50%">- Used to quit the slow loops.</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tbody> </tbody>
+</table>
+<H2>Remarks</H2>
+<UL>
+  <LI>The TIFF decoder for JPEG images generated by Imaging for Windows (aka OJPEG
+    support) will not be implemented. The reasons can be found in the <a href="http://www.libtiff.org/bugs.html">LibTIFF</a>
+    site. The code to support this format is at <a href="ftp://ftp.remotesensing.org/libtiff/tiff-v3.5.7-alpha4.tar.gz">ftp://ftp.remotesensing.org/libtiff/tiff-v3.5.7-alpha4.tar.gz</a></LI>
+</UL>
+<H2>To do</H2>
+<UL>
+  <LI>Rectangular and region selection.
+  <LI>Layers and frames.
+  <LI>Image filters (smooth, gradient, special effects) </LI>
+</UL>
+<H2>Release History</H2>
+<P><B>v1.00 - 12 Aug 2001</B> <br>
+  - Basic implementation and interface.<br>
+  <b>v1.01 - 27 Aug 2001</b><br>
+  <b>v1.10 - 23 Sep 2001</b><br>
+  <b>v1.23 - 15 Oct 2001</b> <br>
+  <b>v1.25 - 28 Oct 2001</b> <br>
+  - See file history.htm<br>
+  <br>
+<H2>Compatibility</H2>
+<P>Win95,WinNT, Win98, WinME, W2K, WinXP = Yes
+<P>For any questions, e-mail to: <A
+href="mailto:ing.davide.pizzolato@libero.it">ing.davide.pizzolato@libero.it</A> <!-- Article Ends -->
