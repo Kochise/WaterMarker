@@ -27,7 +27,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "CxImageCrtDll"=.\CxImage\CxImage\CxImageDLL\CxImageCrtDll.dsp - Package Owner=<4>
+Project: "TurboDLL"=.\TurboDLL\TurboDLL.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

@@ -21,20 +21,20 @@ CWaterMarkerDlg::CWaterMarkerDlg(CWnd* pParent /*=NULL*/)
   : CDialog(CWaterMarkerDlg::IDD, pParent)
 {
   //{{AFX_DATA_INIT(CWaterMarkerDlg)
-  m_nOffsetBas = 0;
-  m_nOffsetDroite = 0;
-  m_nOffsetGauche = 0;
-  m_nOffsetHaut = 0;
-  m_nQualDst = 0;
   m_oStrPathSrc = _T("");
   m_oStrPathDst = _T("");
   m_oStrFileStamp = _T("");
-  m_nAlpha = 0;
   m_bAlpha = FALSE;
-  m_nRedimApres = 0;
-  m_nRedimAvant = 0;
   m_bTile = FALSE;
-  //}}AFX_DATA_INIT
+	m_oStrBas = _T("");
+	m_oStrDroite = _T("");
+	m_oStrGauche = _T("");
+	m_oStrHaut = _T("");
+	m_oStrRedimApres = _T("");
+	m_oStrRedimAvant = _T("");
+	m_oStrQualDst = _T("");
+	m_oStrAlpha = _T("");
+	//}}AFX_DATA_INIT
   // Note that LoadIcon does not require a subsequent DestroyIcon in Win32
   m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -43,6 +43,14 @@ void CWaterMarkerDlg::DoDataExchange(CDataExchange* pDX)
 {
   CDialog::DoDataExchange(pDX);
   //{{AFX_DATA_MAP(CWaterMarkerDlg)
+	DDX_Control(pDX, IDC_SPIN_REDIM_AVANT, m_oSpinRedimAvant);
+	DDX_Control(pDX, IDC_SPIN_REDIM_APRES, m_oSpinRedimApres);
+	DDX_Control(pDX, IDC_SPIN_QUAL_DST, m_oSpinQualDst);
+	DDX_Control(pDX, IDC_SPIN_HAUT, m_oSpinHaut);
+	DDX_Control(pDX, IDC_SPIN_GAUCHE, m_oSpinGauche);
+	DDX_Control(pDX, IDC_SPIN_DROITE, m_oSpinDroite);
+	DDX_Control(pDX, IDC_SPIN_BAS, m_oSpinBas);
+	DDX_Control(pDX, IDC_SPIN_ALPHA, m_oSpinAlpha);
   DDX_Control(pDX, IDC_SLIDER_REDIM_AVANT, m_oSliderRedimAvant);
   DDX_Control(pDX, IDC_SLIDER_REDIM_APRES, m_oSliderRedimApres);
   DDX_Control(pDX, IDC_EDIT_PATH_SRC, m_oEditPathSrc);
@@ -62,21 +70,20 @@ void CWaterMarkerDlg::DoDataExchange(CDataExchange* pDX)
   DDX_Control(pDX, IDC_SLIDER_QUAL_DST, m_oSliderQualDst);
   DDX_Control(pDX, IDC_COMBO_TYPE_SRC, m_oComboTypeSrc);
   DDX_Control(pDX, IDC_COMBO_TYPE_DST, m_oComboTypeDst);
-  DDX_Text(pDX, IDC_EDIT_BAS, m_nOffsetBas);
-  DDX_Text(pDX, IDC_EDIT_DROITE, m_nOffsetDroite);
-  DDX_Text(pDX, IDC_EDIT_GAUCHE, m_nOffsetGauche);
-  DDX_Text(pDX, IDC_EDIT_HAUT, m_nOffsetHaut);
-  DDX_Text(pDX, IDC_EDIT_QUAL_DST, m_nQualDst);
   DDX_Text(pDX, IDC_EDIT_PATH_SRC, m_oStrPathSrc);
   DDX_Text(pDX, IDC_EDIT_PATH_DST, m_oStrPathDst);
   DDX_Text(pDX, IDC_EDIT_FILE_STAMP, m_oStrFileStamp);
-  DDX_Text(pDX, IDC_EDIT_ALPHA, m_nAlpha);
-  DDV_MinMaxInt(pDX, m_nAlpha, 0, 255);
   DDX_Check(pDX, IDC_CHECK_ALPHA, m_bAlpha);
-  DDX_Text(pDX, IDC_EDIT_REDIM_APRES, m_nRedimApres);
-  DDX_Text(pDX, IDC_EDIT_REDIM_AVANT, m_nRedimAvant);
   DDX_Check(pDX, IDC_CHECK_TILE, m_bTile);
-  //}}AFX_DATA_MAP
+	DDX_Text(pDX, IDC_EDIT_BAS, m_oStrBas);
+	DDX_Text(pDX, IDC_EDIT_DROITE, m_oStrDroite);
+	DDX_Text(pDX, IDC_EDIT_GAUCHE, m_oStrGauche);
+	DDX_Text(pDX, IDC_EDIT_HAUT, m_oStrHaut);
+	DDX_Text(pDX, IDC_EDIT_REDIM_APRES, m_oStrRedimApres);
+	DDX_Text(pDX, IDC_EDIT_REDIM_AVANT, m_oStrRedimAvant);
+	DDX_Text(pDX, IDC_EDIT_QUAL_DST, m_oStrQualDst);
+	DDX_Text(pDX, IDC_EDIT_ALPHA, m_oStrAlpha);
+	//}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(CWaterMarkerDlg, CDialog)
@@ -116,7 +123,7 @@ BEGIN_MESSAGE_MAP(CWaterMarkerDlg, CDialog)
   ON_EN_CHANGE(IDC_EDIT_REDIM_APRES, OnChangeEditRedimApres)
   ON_NOTIFY(NM_RELEASEDCAPTURE, IDC_SLIDER_REDIM_APRES, OnReleasedcaptureSliderRedimApres)
   ON_BN_CLICKED(IDC_CHECK_TILE, OnCheckTile)
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 // ========================
@@ -227,11 +234,26 @@ BOOL CWaterMarkerDlg::OnInitDialog()
 
   //
 
+  m_oStrHaut.Format("%d", m_nOffsetHaut);
+  m_oStrBas.Format("%d", m_nOffsetBas);
+  m_oStrGauche.Format("%d", m_nOffsetGauche);
+  m_oStrDroite.Format("%d", m_nOffsetDroite);
+
+  m_oSpinHaut.SetRange(-100, 100);
+  m_oSpinBas.SetRange(-100, 100);
+  m_oSpinGauche.SetRange(-100, 100);
+  m_oSpinDroite.SetRange(-100, 100);
+
+  //
+
   m_nQualDst      = AfxGetApp()->GetProfileInt(_T("Work"), _T("QualDst"), 80);
 
   if(m_nQualDst <   0) m_nQualDst = 0;
   if(m_nQualDst > 100) m_nQualDst = 100;
 
+  m_oStrQualDst.Format("%d", m_nQualDst);
+
+  m_oSpinQualDst.SetRange(0, 100);
   m_oSliderQualDst.SetRange(0, 100);
   m_oSliderQualDst.SetTicFreq(20);
   m_oSliderQualDst.SetPageSize(20);
@@ -245,6 +267,9 @@ BOOL CWaterMarkerDlg::OnInitDialog()
   if(m_nAlpha <   0) m_nAlpha = 0;
   if(m_nAlpha > 255) m_nAlpha = 255;
 
+  m_oStrAlpha.Format("%d", m_nAlpha);
+
+  m_oSpinAlpha.SetRange(0, 255);
   m_oSliderAlpha.SetRange(0, 255);
   m_oSliderAlpha.SetTicFreq(32);
   m_oSliderAlpha.SetPageSize(32);
@@ -257,6 +282,9 @@ BOOL CWaterMarkerDlg::OnInitDialog()
   if(m_nRedimAvant <  10) m_nRedimAvant = 10;
   if(m_nRedimAvant > 200) m_nRedimAvant = 200;
 
+  m_oStrRedimAvant.Format("%d", m_nRedimAvant);
+
+  m_oSpinRedimAvant.SetRange(10, 200);
   m_oSliderRedimAvant.SetRange(10, 200);
   m_oSliderRedimAvant.SetTicFreq(20);
   m_oSliderRedimAvant.SetPageSize(20);
@@ -274,6 +302,9 @@ BOOL CWaterMarkerDlg::OnInitDialog()
   if(m_nRedimApres <  10) m_nRedimApres = 10;
   if(m_nRedimApres > 200) m_nRedimApres = 200;
 
+  m_oStrRedimApres.Format("%d", m_nRedimApres);
+
+  m_oSpinRedimApres.SetRange(10, 200);
   m_oSliderRedimApres.SetRange(10, 200);
   m_oSliderRedimApres.SetTicFreq(20);
   m_oSliderRedimApres.SetPageSize(20);
@@ -622,8 +653,12 @@ void CWaterMarkerDlg::OnChangeEditQualDst()
 {
   UpdateData(TRUE);
 
+  m_nQualDst = ATOI(m_oStrQualDst);
+
   if(m_nQualDst <   0) m_nQualDst = 0;
   if(m_nQualDst > 100) m_nQualDst = 100;
+
+  m_oStrQualDst.Format("%d", m_nQualDst);
 
   m_oSliderQualDst.SetPos(m_nQualDst);
 }
@@ -631,6 +666,8 @@ void CWaterMarkerDlg::OnChangeEditQualDst()
 void CWaterMarkerDlg::OnReleasedcaptureSliderQualDst(NMHDR* pNMHDR, LRESULT* pResult) 
 {
   m_nQualDst = m_oSliderQualDst.GetPos();
+
+  m_oStrQualDst.Format("%d", m_nQualDst);
 
   UpdateData(FALSE);
 
@@ -649,8 +686,12 @@ void CWaterMarkerDlg::OnChangeEditAlpha()
 {
   UpdateData(TRUE);
 
+  m_nAlpha = ATOI(m_oStrAlpha);
+
   if(m_nAlpha <   0) m_nAlpha = 0;
   if(m_nAlpha > 255) m_nAlpha = 255;
+
+  m_oStrAlpha.Format("%d", m_nAlpha);
 
   m_oSliderAlpha.SetPos(m_nAlpha);
 }
@@ -658,6 +699,8 @@ void CWaterMarkerDlg::OnChangeEditAlpha()
 void CWaterMarkerDlg::OnReleasedcaptureSliderAlpha(NMHDR* pNMHDR, LRESULT* pResult) 
 {
   m_nAlpha = m_oSliderAlpha.GetPos();
+
+  m_oStrAlpha.Format("%d", m_nAlpha);
 
   UpdateData(FALSE);
 
@@ -670,8 +713,12 @@ void CWaterMarkerDlg::OnChangeEditRedimAvant()
 {
   UpdateData(TRUE);
 
+  m_nRedimAvant = ATOI(m_oStrRedimAvant);
+
   if(m_nRedimAvant <  10) m_nRedimAvant = 10;
   if(m_nRedimAvant > 200) m_nRedimAvant = 200;
+
+  m_oStrRedimAvant.Format("%d", m_nRedimAvant);
 
   m_oSliderRedimAvant.SetPos(m_nRedimAvant);
 
@@ -681,6 +728,8 @@ void CWaterMarkerDlg::OnChangeEditRedimAvant()
 void CWaterMarkerDlg::OnReleasedcaptureSliderRedimAvant(NMHDR* pNMHDR, LRESULT* pResult) 
 {
   m_nRedimAvant = m_oSliderRedimAvant.GetPos();
+
+  m_oStrRedimAvant.Format("%d", m_nRedimAvant);
 
   UpdateData(FALSE);
 
@@ -702,8 +751,12 @@ void CWaterMarkerDlg::OnChangeEditRedimApres()
 {
   UpdateData(TRUE);
 
+  m_nRedimApres = ATOI(m_oStrRedimApres);
+
   if(m_nRedimApres <  10) m_nRedimApres = 10;
   if(m_nRedimApres > 200) m_nRedimApres = 200;
+
+  m_oStrRedimApres.Format("%d", m_nRedimAvant);
 
   m_oSliderRedimApres.SetPos(m_nRedimApres);
 
@@ -713,6 +766,8 @@ void CWaterMarkerDlg::OnChangeEditRedimApres()
 void CWaterMarkerDlg::OnReleasedcaptureSliderRedimApres(NMHDR* pNMHDR, LRESULT* pResult) 
 {
   m_nRedimApres = m_oSliderRedimApres.GetPos();
+
+  m_oStrRedimApres.Format("%d", m_nRedimApres);
 
   UpdateData(FALSE);
 
@@ -727,12 +782,26 @@ void CWaterMarkerDlg::OnChangeEditHaut()
 {
   UpdateData(TRUE);
 
+  m_nOffsetHaut = ATOI(m_oStrHaut);
+
+  if(m_nOffsetHaut <  -100) m_nOffsetHaut = -100;
+  if(m_nOffsetHaut >   100) m_nOffsetHaut =  100;
+
+  m_oStrHaut.Format("%d", m_nOffsetHaut);
+
   VerifRun();
 }
 
 void CWaterMarkerDlg::OnChangeEditBas() 
 {
   UpdateData(TRUE);
+
+  m_nOffsetBas = ATOI(m_oStrBas);
+
+  if(m_nOffsetBas <  -100) m_nOffsetBas = -100;
+  if(m_nOffsetBas >   100) m_nOffsetBas =  100;
+
+  m_oStrBas.Format("%d", m_nOffsetBas);
 
   VerifRun();
 }
@@ -741,12 +810,26 @@ void CWaterMarkerDlg::OnChangeEditGauche()
 {
   UpdateData(TRUE);
 
+  m_nOffsetGauche = ATOI(m_oStrGauche);
+
+  if(m_nOffsetGauche <  -100) m_nOffsetGauche = -100;
+  if(m_nOffsetGauche >   100) m_nOffsetGauche =  100;
+
+  m_oStrGauche.Format("%d", m_nOffsetGauche);
+
   VerifRun();
 }
 
 void CWaterMarkerDlg::OnChangeEditDroite() 
 {
   UpdateData(TRUE);
+
+  m_nOffsetDroite = ATOI(m_oStrDroite);
+
+  if(m_nOffsetDroite <  -100) m_nOffsetDroite = -100;
+  if(m_nOffsetDroite >   100) m_nOffsetDroite =  100;
+
+  m_oStrDroite.Format("%d", m_nOffsetDroite);
 
   VerifRun();
 }

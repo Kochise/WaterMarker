@@ -45,6 +45,15 @@
 #define IDC_SLIDER_REDIM_AVANT          1039
 #define IDC_SLIDER_REDIM_APRES          1040
 #define IDC_CHECK_TILE                  1041
+#define IDC_SPIN_QUAL_DST               1043
+#define IDC_SPIN_ALPHA                  1044
+#define IDC_SPIN_REDIM_AVANT            1045
+#define IDC_SPIN_REDIM_APRES            1046
+#define IDC_SPIN_HAUT                   1047
+#define IDC_SPIN_BAS                    1048
+#define IDC_SPIN_GAUCHE                 1049
+#define IDC_SPIN_DROITE                 1050
+#define IDC_EDIT1                       1051
 
 // Next default values for new objects
 // 
@@ -52,7 +61,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        130
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1042
+#define _APS_NEXT_CONTROL_VALUE         1053
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

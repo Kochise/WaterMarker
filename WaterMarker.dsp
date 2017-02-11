@@ -276,6 +276,62 @@ SOURCE=.\CxImage\CxImage\xmemfile.cpp
 # SUBTRACT CPP /YX /Yc /Yu
 # End Source File
 # End Group
+# Begin Group "Source Memory"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Memory.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryArray.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryContainer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryPool.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryString.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringArray.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringContainer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringPool.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringTree.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTree.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTreeAvl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTreeRedBlack.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTreeSplay.cpp
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\StdAfx.cpp
@@ -315,6 +371,10 @@ SOURCE=.\DiskObject.h
 # Begin Source File
 
 SOURCE=.\EditLabel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FixedCoSin.h
 # End Source File
 # Begin Source File
 
@@ -419,6 +479,62 @@ SOURCE=.\CxImage\CxImage\xiofile.h
 # Begin Source File
 
 SOURCE=.\CxImage\CxImage\xmemfile.h
+# End Source File
+# End Group
+# Begin Group "Header Memory"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Memory.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryArray.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryContainer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryPool.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryString.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringArray.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringContainer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringPool.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryStringTree.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTree.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTreeAvl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTreeRedBlack.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemoryTreeSplay.h
 # End Source File
 # End Group
 # Begin Source File

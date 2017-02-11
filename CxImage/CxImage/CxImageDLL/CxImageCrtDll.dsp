@@ -54,7 +54,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /machine:I386 /CxImageCrtDll
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib ../../png/Release/png.lib ../../jpeg/Release/jpeg.lib ../../zlib/Release/zlib.lib ../../tiff/Release/tiff.lib /nologo /dll /machine:I386 /out:"../../bin/cximagecrt.dll"
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib /nologo /dll /machine:I386 /out:"../../bin/cximagecrt.dll"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "CxImageCrtDll - Win32 Debug"
@@ -82,7 +82,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /debug /machine:I386 /pdbtype:sept /CxImageCrtDll
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib ../../png/Debug/pngD.lib ../../jpeg/Debug/jpegD.lib ../../zlib/Debug/zlibD.lib ../../tiff/Debug/tiffD.lib /nologo /dll /debug /machine:I386 /out:"../../bin/cximagecrtd.dll" /pdbtype:sept
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib /nologo /dll /debug /machine:I386 /out:"../../bin/cximagecrtd.dll" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none
 
 !ENDIF 

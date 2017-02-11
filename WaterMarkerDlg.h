@@ -36,6 +36,14 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CWaterMarkerDlg)
 	enum { IDD = IDD_WATERMARKER_DIALOG };
+	CSpinButtonCtrl	m_oSpinRedimAvant;
+	CSpinButtonCtrl	m_oSpinRedimApres;
+	CSpinButtonCtrl	m_oSpinQualDst;
+	CSpinButtonCtrl	m_oSpinHaut;
+	CSpinButtonCtrl	m_oSpinGauche;
+	CSpinButtonCtrl	m_oSpinDroite;
+	CSpinButtonCtrl	m_oSpinBas;
+	CSpinButtonCtrl	m_oSpinAlpha;
 	CSliderCtrl	m_oSliderRedimAvant;
 	CSliderCtrl	m_oSliderRedimApres;
 	CEditLabel	m_oEditPathSrc;
@@ -55,19 +63,19 @@ public:
 	CSliderCtrl	m_oSliderQualDst;
 	CComboBox	m_oComboTypeSrc;
 	CComboBox	m_oComboTypeDst;
-	int		m_nOffsetBas;
-	int		m_nOffsetDroite;
-	int		m_nOffsetGauche;
-	int		m_nOffsetHaut;
-	int		m_nQualDst;
 	CString	m_oStrPathSrc;
 	CString	m_oStrPathDst;
 	CString	m_oStrFileStamp;
-	int		m_nAlpha;
 	BOOL	m_bAlpha;
-	int		m_nRedimApres;
-	int		m_nRedimAvant;
 	BOOL	m_bTile;
+	CString	m_oStrBas;
+	CString	m_oStrDroite;
+	CString	m_oStrGauche;
+	CString	m_oStrHaut;
+	CString	m_oStrRedimApres;
+	CString	m_oStrRedimAvant;
+	CString	m_oStrQualDst;
+	CString	m_oStrAlpha;
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
@@ -84,6 +92,15 @@ protected:
 	HBITMAP m_hBmpFinal;
 
   BOOL    m_bStop;
+
+  int m_nOffsetBas;
+  int m_nOffsetDroite;
+  int m_nOffsetGauche;
+  int m_nOffsetHaut;
+  int m_nQualDst;
+  int m_nAlpha;
+  int m_nRedimAvant;
+  int m_nRedimApres;
 
   void    VerifRun(void);
   int     ListeFichiers(CStringArray& o_raoListeFichiers, CString i_oStrRepertoire, CString i_oStrHeader, CString i_oStrExtensions, BOOL i_bConcatenate = TRUE);

@@ -81,7 +81,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386
-# ADD LINK32 wininet.lib ../png/Debug/pngD.lib ../jpeg/Debug/jpegD.lib ../zlib/Debug/zlibD.lib ../tiff/Debug/tiffD.lib ../j2k/Debug/j2k.lib ../jbig/Debug/jbig.lib ../jasper/Debug/jasper.lib ../cximage/Debug/cximage.lib /nologo /subsystem:windows /debug /machine:I386 /out:"../bin/demod.exe"
+# ADD LINK32 wininet.lib ../png/Debug/png.lib ../jpeg/Debug/jpeg.lib ../zlib/Debug/zlib.lib ../tiff/Debug/tiff.lib ../j2k/Debug/j2k.lib ../jbig/Debug/jbig.lib ../jasper/Debug/jasper.lib ../cximage/Debug/cximage.lib /nologo /subsystem:windows /debug /machine:I386 /out:"../bin/demod.exe"
 
 !ENDIF 
 

@@ -76,42 +76,64 @@ IDR_MAINFRAME           ICON    DISCARDABLE     "res\\WaterMarker.ico"
 IDD_WATERMARKER_DIALOG DIALOGEX 0, 0, 512, 386
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "WaterMarker 1.02 © 2006 Kochise & Davide Pizzolato (CxImage)"
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+CAPTION "WaterMarker 1.03 © 2006 Kochise & Davide Pizzolato (CxImage)"
+FONT 8, "MS Sans Serif"
 BEGIN
+    GROUPBOX        " Configuration ",IDC_GROUP_CONFIG,4,4,504,328,BS_CENTER
     LTEXT           "Chemin source",IDC_STATIC,12,16,48,8
-    LTEXT           "Type source",IDC_STATIC,12,32,40,8
-    LTEXT           "Fichier stamp",IDC_STATIC,12,48,42,8
-    LTEXT           "Chemin destination",IDC_STATIC,12,64,60,8
-    LTEXT           "Type destination",IDC_STATIC,12,80,53,8
-    EDITTEXT        IDC_EDIT_PATH_SRC,76,16,404,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PATH_SRC,76,16,404,14,ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT
     PUSHBUTTON      "...",IDC_BUTTON_PATH_SRC,484,16,18,14
-    COMBOBOX        IDC_COMBO_TYPE_SRC,76,32,424,128,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_EDIT_FILE_STAMP,76,48,404,14,ES_AUTOHSCROLL
+    LTEXT           "Type source",IDC_STATIC,12,32,40,8
+    COMBOBOX        IDC_COMBO_TYPE_SRC,76,32,424,128,CBS_DROPDOWN | 
+                    CBS_OEMCONVERT | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Fichier stamp",IDC_STATIC,12,48,42,8
+    EDITTEXT        IDC_EDIT_FILE_STAMP,76,48,404,14,ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT
     PUSHBUTTON      "...",IDC_BUTTON_FILE_STAMP,484,48,18,14
-    EDITTEXT        IDC_EDIT_PATH_DST,76,64,404,14,ES_AUTOHSCROLL
+    LTEXT           "Chemin destination",IDC_STATIC,12,64,60,8
+    EDITTEXT        IDC_EDIT_PATH_DST,76,64,404,14,ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT
     PUSHBUTTON      "...",IDC_BUTTON_PATH_DST,484,64,18,14
-    COMBOBOX        IDC_COMBO_TYPE_DST,76,80,424,136,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Type destination",IDC_STATIC,12,80,53,8
+    COMBOBOX        IDC_COMBO_TYPE_DST,76,80,424,136,CBS_DROPDOWN | 
+                    CBS_OEMCONVERT | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Qualite",IDC_STATIC,12,96,23,8
+    EDITTEXT        IDC_EDIT_QUAL_DST,76,96,24,14,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPIN_QUAL_DST,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,100,96,
+                    10,14
+    LTEXT           "%",IDC_STATIC,112,96,8,8
+    CONTROL         "Slider1",IDC_SLIDER_QUAL_DST,"msctls_trackbar32",
+                    TBS_AUTOTICKS | WS_TABSTOP,124,96,380,20
+    CONTROL         "Transparence",IDC_CHECK_ALPHA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,120,60,10
+    EDITTEXT        IDC_EDIT_ALPHA,76,120,24,14,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin2",IDC_SPIN_ALPHA,"msctls_updown32",UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,100,120,10,14
+    CONTROL         "Slider1",IDC_SLIDER_ALPHA,"msctls_trackbar32",
+                    TBS_AUTOTICKS | WS_TABSTOP,124,120,380,20
+    LTEXT           "Redim. AVANT",IDC_STATIC,12,148,49,8
+    EDITTEXT        IDC_EDIT_REDIM_AVANT,76,144,24,14,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin3",IDC_SPIN_REDIM_AVANT,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,100,144,
+                    10,14
+    LTEXT           "%",IDC_STATIC,112,144,8,8
+    CONTROL         "Slider2",IDC_SLIDER_REDIM_AVANT,"msctls_trackbar32",
+                    TBS_AUTOTICKS | WS_TABSTOP,124,144,380,20
+    CONTROL         "Mosaïque",IDC_CHECK_TILE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,168,48,10
     CONTROL         "",IDC_STATIC_BMP_STAMP,"Static",SS_BITMAP | SS_SUNKEN,
                     12,184,16,14
-    CONTROL         "",IDC_STATIC_BMP_FINAL,"Static",SS_BITMAP | SS_SUNKEN,
-                    340,184,16,14
-    LTEXT           "Qualite",IDC_STATIC,12,96,23,8
-    EDITTEXT        IDC_EDIT_QUAL_DST,76,96,28,14,ES_AUTOHSCROLL
-    CONTROL         "Slider1",IDC_SLIDER_QUAL_DST,"msctls_trackbar32",
-                    TBS_AUTOTICKS | WS_TABSTOP,116,96,388,20
-    EDITTEXT        IDC_EDIT_HAUT,244,184,28,14,ES_CENTER | ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_GAUCHE,180,232,28,14,ES_CENTER | ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_DROITE,308,232,28,14,ES_CENTER | ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_BAS,244,285,28,14,ES_CENTER | ES_AUTOHSCROLL
-    CONTROL         "Haut",IDC_BUTTON_H,"Button",BS_AUTORADIOBUTTON | 
-                    BS_PUSHLIKE,244,200,28,24
-    CONTROL         "Centre",IDC_BUTTON_C,"Button",BS_AUTORADIOBUTTON | 
-                    BS_PUSHLIKE,244,229,28,24
-    CONTROL         "Bas",IDC_BUTTON_B,"Button",BS_AUTORADIOBUTTON | 
-                    BS_PUSHLIKE,244,256,28,24
+    CONTROL         "",IDC_STATIC_RECT_STAMP,"Static",SS_BLACKFRAME | NOT 
+                    WS_VISIBLE,12,184,160,116
+    EDITTEXT        IDC_EDIT_GAUCHE,180,232,28,14,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin7",IDC_SPIN_GAUCHE,"msctls_updown32",UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_HORZ,180,244,28,8
     CONTROL         "Coin Sup G",IDC_BUTTON_CSG,"Button",BS_AUTORADIOBUTTON | 
                     BS_PUSHLIKE | BS_MULTILINE,212,200,28,24,
                     WS_EX_RTLREADING
@@ -120,6 +142,20 @@ BEGIN
     CONTROL         "Coin Inf G",IDC_BUTTON_CIG,"Button",BS_AUTORADIOBUTTON | 
                     BS_PUSHLIKE | BS_MULTILINE,212,256,28,24,
                     WS_EX_RTLREADING
+    EDITTEXT        IDC_EDIT_HAUT,244,184,28,14,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin5",IDC_SPIN_HAUT,"msctls_updown32",UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,272,184,10,14
+    CONTROL         "Haut",IDC_BUTTON_H,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,244,200,28,24
+    CONTROL         "Centre",IDC_BUTTON_C,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,244,229,28,24
+    CONTROL         "Bas",IDC_BUTTON_B,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,244,256,28,24
+    EDITTEXT        IDC_EDIT_BAS,244,285,28,14,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin6",IDC_SPIN_BAS,"msctls_updown32",UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,272,284,10,14
     CONTROL         "Coin Sup D",IDC_BUTTON_CSD,"Button",BS_AUTORADIOBUTTON | 
                     BS_PUSHLIKE | BS_MULTILINE,276,200,28,24,
                     WS_EX_RTLREADING
@@ -128,33 +164,26 @@ BEGIN
     CONTROL         "Coin Inf D",IDC_BUTTON_CID,"Button",BS_AUTORADIOBUTTON | 
                     BS_PUSHLIKE | BS_MULTILINE,276,256,28,24,
                     WS_EX_RTLREADING
-    LTEXT           "",IDC_STATIC_TEXT,12,364,464,12
-    LTEXT           "",IDC_STATIC_PROGRESS,12,348,464,12,0,WS_EX_STATICEDGE
-    PUSHBUTTON      "!!!",IDC_BUTTON_RUN,480,348,20,28
-    CONTROL         "",IDC_STATIC_RECT_STAMP,"Static",SS_BLACKFRAME | NOT 
-                    WS_VISIBLE,12,184,160,116
+    EDITTEXT        IDC_EDIT_DROITE,308,232,28,14,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin8",IDC_SPIN_DROITE,"msctls_updown32",UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_HORZ,308,244,28,8
+    CONTROL         "",IDC_STATIC_BMP_FINAL,"Static",SS_BITMAP | SS_SUNKEN,
+                    340,184,16,14
     CONTROL         "",IDC_STATIC_RECT_FINAL,"Static",SS_BLACKFRAME | NOT 
                     WS_VISIBLE,340,184,160,116
-    EDITTEXT        IDC_EDIT_ALPHA,76,120,28,14,ES_AUTOHSCROLL
-    CONTROL         "Slider1",IDC_SLIDER_ALPHA,"msctls_trackbar32",
-                    TBS_AUTOTICKS | WS_TABSTOP,116,120,388,20
-    GROUPBOX        " Configuration ",IDC_GROUP_CONFIG,4,4,504,328,BS_CENTER
-    GROUPBOX        " Travail ",IDC_GROUP_RUN,4,336,504,48,BS_CENTER
-    CONTROL         "Transparence",IDC_CHECK_ALPHA,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,120,60,10
-    LTEXT           "Redim. AVANT",IDC_STATIC,12,148,49,8
-    EDITTEXT        IDC_EDIT_REDIM_AVANT,76,144,28,14,ES_AUTOHSCROLL
-    CONTROL         "Slider2",IDC_SLIDER_REDIM_AVANT,"msctls_trackbar32",
-                    TBS_AUTOTICKS | WS_TABSTOP,116,144,388,20
     LTEXT           "Redim. APRES",IDC_STATIC,12,313,49,8
-    EDITTEXT        IDC_EDIT_REDIM_APRES,76,308,28,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_REDIM_APRES,76,308,24,14,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_OEMCONVERT | ES_NUMBER
+    CONTROL         "Spin4",IDC_SPIN_REDIM_APRES,"msctls_updown32",
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS,100,308,10,14
+    LTEXT           "%",IDC_STATIC,112,308,8,8
     CONTROL         "Slider2",IDC_SLIDER_REDIM_APRES,"msctls_trackbar32",
-                    TBS_AUTOTICKS | WS_TABSTOP,116,308,388,20
-    LTEXT           "%",IDC_STATIC,104,96,8,8
-    LTEXT           "%",IDC_STATIC,104,308,8,8
-    LTEXT           "%",IDC_STATIC,104,144,8,8
-    CONTROL         "Mosaïque",IDC_CHECK_TILE,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,168,48,10
+                    TBS_AUTOTICKS | WS_TABSTOP,124,308,380,20
+    GROUPBOX        " Travail ",IDC_GROUP_RUN,4,336,504,48,BS_CENTER
+    LTEXT           "",IDC_STATIC_PROGRESS,12,348,464,12,0,WS_EX_STATICEDGE
+    LTEXT           "",IDC_STATIC_TEXT,12,364,464,12
+    PUSHBUTTON      "!!!",IDC_BUTTON_RUN,480,348,20,28
 END
 
 
@@ -165,8 +194,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,6,4,4
- PRODUCTVERSION 1,0,2,1
+ FILEVERSION 2,6,3,16
+ PRODUCTVERSION 1,0,3,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -184,14 +213,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "Application MFC WaterMarker\0"
-            VALUE "FileVersion", "2, 6, 4, 4\0"
+            VALUE "FileVersion", "2, 6, 3, 16\0"
             VALUE "InternalName", "WaterMarker\0"
             VALUE "LegalCopyright", "Copyright (C) 2006\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "WaterMarker.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Application WaterMarker\0"
-            VALUE "ProductVersion", "1, 0, 2, 1\0"
+            VALUE "ProductVersion", "1, 0, 3, 1\0"
             VALUE "SpecialBuild", "\0"
         END
     END
