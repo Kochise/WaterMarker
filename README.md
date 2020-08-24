@@ -2,6 +2,8 @@
 
 Windows MFC program to stamp a copyright logo on pictures
 
+![WaterMarker](https://raw.githubusercontent.com/Kochise/WaterMarker/master/00-Intro.png)
+
 * Hardware and software needed
 
 You need the following to get this program working :
